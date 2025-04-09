@@ -16,15 +16,18 @@ REPOSITORIO_GITHUB = 'AutomaticStreetMobster'
 URL_VERSAO = f'https://raw.githubusercontent.com/{USUARIO_GITHUB}/{REPOSITORIO_GITHUB}/main/versao.txt'
 URL_ZIP = f'https://github.com/{USUARIO_GITHUB}/{REPOSITORIO_GITHUB}/releases/latest/download/Automatic%20StreetMobster.zip'
 
+def comparar_versoes(v1, v2):
+    return list(map(int, v1.split("."))) > list(map(int, v2.split(".")))
+
 def verificar_atualizacao():
     try:
         resposta = requests.get(URL_VERSAO)
         resposta.raise_for_status()
         versao_remota = resposta.text.strip()
-        if versao_remota > VERSAO_ATUAL:
+        if comparar_versoes(versao_remota, VERSAO_ATUAL):
             return versao_remota
     except requests.RequestException as e:
-        print(f"Erro ao verificar atualização: {e}")
+        messagebox.showerror("Erro de Conexão", f"Não foi possível verificar atualizações:\n{e}")
     return None
 
 def baixar_atualizacao(progresso, label_status):
@@ -70,6 +73,12 @@ def aplicar_atualizacao(caminho_zip):
         messagebox.showerror("Erro", f"Erro ao aplicar atualização: {e}")
 
 def reiniciar_aplicacao():
+    try:
+        root = tk._default_root
+        if root:
+            root.destroy()
+    except:
+        pass
     python = sys.executable
     os.execl(python, python, *sys.argv)
 
@@ -93,14 +102,17 @@ def iniciar_interface():
     label = ttk.Label(frame, text="Bem-vindo ao Automatic StreetMobster!")
     label.grid(row=0, column=0, columnspan=2, pady=10)
 
-    btn_verificar = ttk.Button(frame, text="Verificar Atualizações", command=lambda: checar_e_atualizar(progresso, label_status))
-    btn_verificar.grid(row=1, column=0, columnspan=2, pady=5)
-
     progresso = ttk.Progressbar(frame, orient="horizontal", length=300, mode="determinate")
     progresso.grid(row=2, column=0, columnspan=2, pady=5)
 
     label_status = ttk.Label(frame, text="")
     label_status.grid(row=3, column=0, columnspan=2, pady=5)
+
+    btn_verificar = ttk.Button(frame, text="Verificar Atualizações", command=lambda: Thread(target=checar_e_atualizar, args=(progresso, label_status)).start())
+    btn_verificar.grid(row=1, column=0, columnspan=2, pady=5)
+
+    btn_sair = ttk.Button(frame, text="Sair", command=root.destroy)
+    btn_sair.grid(row=4, column=0, columnspan=2, pady=10)
 
     root.mainloop()
 
