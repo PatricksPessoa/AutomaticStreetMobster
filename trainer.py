@@ -16,7 +16,6 @@ REPOSITORIO_GITHUB = 'AutomaticStreetMobster'
 URL_VERSAO = f'https://raw.githubusercontent.com/{USUARIO_GITHUB}/{REPOSITORIO_GITHUB}/main/versao.txt'
 URL_ZIP = f'https://github.com/{USUARIO_GITHUB}/{REPOSITORIO_GITHUB}/releases/latest/download/Automatic%20StreetMobster.zip'
 
-
 def verificar_atualizacao():
     try:
         resposta = requests.get(URL_VERSAO)
