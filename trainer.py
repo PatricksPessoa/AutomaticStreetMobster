@@ -11,10 +11,11 @@ import shutil
 VERSAO_ATUAL = "1.0.0"
 
 # Configurações do GitHub
-USUARIO_GITHUB = 'SEU_USUARIO'
-REPOSITORIO_GITHUB = 'SEU_REPOSITORIO'
+USUARIO_GITHUB = 'PatricksPessoa'
+REPOSITORIO_GITHUB = 'AutomaticStreetMobster'
 URL_VERSAO = f'https://raw.githubusercontent.com/{USUARIO_GITHUB}/{REPOSITORIO_GITHUB}/main/versao.txt'
 URL_ZIP = f'https://github.com/{USUARIO_GITHUB}/{REPOSITORIO_GITHUB}/releases/latest/download/Automatic%20StreetMobster.zip'
+
 
 def verificar_atualizacao():
     try:
