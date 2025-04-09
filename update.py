@@ -13,7 +13,7 @@ VERSAO_ATUAL = "1.0.0"
 # Configurações do GitHub
 USUARIO_GITHUB = 'PatricksPessoa'
 REPOSITORIO_GITHUB = 'AutomaticStreetMobster'
-URL_VERSAO = f'https://raw.githubusercontent.com/{USUARIO_GITHUB}/{REPOSITORIO_GITHUB}/main/versao.txt'
+URL_VERSAO = f'https://raw.githubusercontent.com/{USUARIO_GITHUB}/{REPOSITORIO_GITHUB}/main/version.txt'
 URL_ZIP = f'https://github.com/{USUARIO_GITHUB}/{REPOSITORIO_GITHUB}/releases/latest/download/Automatic%20StreetMobster.zip'
 
 def comparar_versoes(v1, v2):
